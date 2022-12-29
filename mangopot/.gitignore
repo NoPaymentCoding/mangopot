@@ -37,4 +37,4 @@ out/
 .vscode/
 
 
-application-real-db.properties
+application-RDS.properties
