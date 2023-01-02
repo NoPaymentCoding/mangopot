@@ -1,7 +1,3 @@
-before_install:
-  - cd mangopot
-  - chmod +x gradlew
-
 language: java
 
 jdk:
@@ -16,11 +12,14 @@ cache:
   directories:    
     - '$HOME/mangopot/.gradle'
 
+before_install:
+  - cd mangopot
+  - chmod +x gradlew
+
 script: "./gradlew clean build"
 
 before_deploy:
-  - cd ../../
-  - zip -r mangopot
+  - zip -r mangopot *
   - mkdir -p deploy
   - mv mangopot.zip deploy/mangopot.zip
  
