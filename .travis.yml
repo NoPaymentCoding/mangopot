@@ -12,7 +12,7 @@ cache:
   directories:    
     - '$HOME/.gradle'
 
-script: "./gradlew build"
+script: "mangopot/gradlew clean build"
 
 #CI 실행 완료 시 메일로 알람
 notifications:
