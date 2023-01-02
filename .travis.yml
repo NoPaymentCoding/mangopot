@@ -12,6 +12,7 @@ cache:
   directories:    
     - '$HOME/mangopot/.gradle'
 
+#위치 옮기고 권한 부여
 before_install:
   - cd mangopot
   - chmod +x gradlew
