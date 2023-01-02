@@ -1,4 +1,5 @@
 language: java
+
 jdk:
   - openjdk17
 
@@ -8,15 +9,49 @@ branches:
 
 #Travis CI 서버의 Home
 cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.gradle'
+  directories:    
+    - '$HOME/mangopot/.gradle'
+
+#위치 옮기고 권한 부여
+before_install:
+  - cd mangopot
+  - chmod +x gradlew
 
 script: "./gradlew clean build"
+
+before_deploy:
+  - zip -r mangopot *
+  - mkdir -p deploy
+  - mv mangopot.zip deploy/mangopot.zip
+ 
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: mangopot-ci-cd
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    loacl_dir: deploy
+    wait-until-deploy: true
+    on:
+      all_branches: true #master 브랜치 말고도 다른 브랜치 사용 위해서 추가
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: mangopot-ci-cd
+    key: mangopot.zip
+    bundle_type: zip
+    application: mangopot-deploy
+    deployment_group: mangopot
+    region: ap-northeast-2
+    wait-until-deploy: true
+    on:
+      all_branches: true #master 브랜치 말고도 다른 브랜치 사용 위해서 추가
 
 #CI 실행 완료 시 메일로 알람
 notifications:
   email:
     recipients:
       - "ygy920@gmail.com"
-
