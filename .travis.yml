@@ -18,6 +18,22 @@ cache:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r mangopot
+  - mkdir -p deploy
+  - mv mangopot.zip deploy/mangopot.zip
+ 
+deploy:
+  - provider: s3
+    access_key_id: @AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: mangopot
+    region: ap-norteast-2
+    skip_cleanup: true
+    acl: private
+    loacl_dir: deploy
+    wait-until-deploy: true
+
 #CI 실행 완료 시 메일로 알람
 notifications:
   email:
