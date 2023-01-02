@@ -20,6 +20,7 @@ script: "./gradlew clean build"
 
 #deploy
 before_deploy:
+  - cd ../
   - zip -r mangopot
   - mkdir -p deploy
   - mv mangopot.zip deploy/mangopot.zip
