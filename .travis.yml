@@ -13,7 +13,7 @@ branches:
 #Travis CI 서버의 Home
 cache:
   directories:    
-    - '$HOME/.gradle'
+    - '$HOME/mangopot/.gradle'
 
 script: "mangopot/gradlew clean build"
 
