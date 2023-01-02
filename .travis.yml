@@ -19,8 +19,7 @@ cache:
 script: "./gradlew clean build"
 
 #deploy
-before_deploy:
-  - cd ../
+before_deploy:  
   - zip -r mangopot
   - mkdir -p deploy
   - mv mangopot.zip deploy/mangopot.zip
