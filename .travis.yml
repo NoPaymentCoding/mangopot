@@ -48,8 +48,6 @@ deploy:
     deployment_group: mangopot
     region: ap-northeast-2
     wait-until-deployed: true
-    on:
-      all_branches: true #master 브랜치 말고도 다른 브랜치 사용 위해서 추가
 
 #CI 실행 완료 시 메일로 알람
 notifications:
