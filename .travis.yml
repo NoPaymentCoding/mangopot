@@ -60,8 +60,8 @@ deploy:
     on:
       all_branches: true #master 브랜치 말고도 다른 브랜치 사용 위해서 추가
 
-# #CI 실행 완료 시 메일로 알람
-# notifications:
-#   email:
-#     recipients:
-#       - "ygy920@gmail.com"
+#CI 실행 완료 시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - "ygy920@gmail.com"
