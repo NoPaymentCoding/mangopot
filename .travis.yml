@@ -20,7 +20,7 @@ before_install:
 script: "./gradlew clean build"
 
 before_deploy:
-  # - cd ../
+  - cd ../
   - mkdir -p before-deploy
   - cp scripts/*.sh before-deploy/
   - cp appspec.yml before-deploy/
